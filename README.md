@@ -2,4 +2,5 @@
 
 Base de datos.
 
-![Aquí la descripción de la imagen por si no carga](https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png)
+![Modelo entidad relacion]
+(https://github.com/Sebastian542/Examen/blob/master/diagrama.png)
