@@ -2,5 +2,6 @@
 
 Base de datos.
 
-![Modelo entidad relacion]
-(https://github.com/Sebastian542/Examen/blob/master/diagrama.png)
+![Modelo Entidad relacion]
+(https://raw.githubusercontent.com/Sebastian542/Examen/master/diagrama.png)
+
