@@ -17,8 +17,13 @@ public class ObraService {
     public List<Obra> listAllObra() {return obraRepository.findAll();}
 
     public Obra getObra(Integer id) {
+    String pais="Colombia";
+
         return obraRepository.findById(id).get();
     }
+
+
+
 
 
 

@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.model.Obra;
 import com.example.demo.service.ObraService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,34 @@ public class UserController {
 
   // public List<Obra> list() {return obraService.listAllObra();}
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
+
     public ResponseEntity<Obra> get(@PathVariable Integer id) {
         try {
             Obra obra = obraService.getObra(id);
-            return new ResponseEntity<Obra>(obra, HttpStatus.OK);
+            if(obra.getPais().equals("COLOMBIA")){
+                return new ResponseEntity<Obra>(obra, HttpStatus.OK);
+
+            }
+            return null;
         } catch (NoSuchElementException e) {
             return new ResponseEntity<Obra>(HttpStatus.NOT_FOUND);
         }
     }
+
+
+    @GetMapping("{buscar}")
+
+    public List<Categorias> buscar(String descripcion) {
+
+        String sql = "SELECT e FROM Entidad e INNER JOIN e.EntidadRelacionada er WHERE er.id = :id";
+        Query query = getEntityManager().createQuery(sql);
+        query.setParameter("id", 1);
+        Entidad entidad = query.getSingleResult();
+
+
+    }
+
+
 
 }
