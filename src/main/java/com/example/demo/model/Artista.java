@@ -6,13 +6,10 @@ import jakarta.persistence.*;
 @Table(name = "artistas")
 public class Artista {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_serial;
-    private String tipoId;
+    private int id_serial;
     private String tipo_ide;
     private String numero_ide;
-    private String nombre;
+
     private String nombres;
     private String apellidos;
 
@@ -20,7 +17,7 @@ public class Artista {
 
     }
 
-    public Artista(Integer id_serial, String tipo_ide, String numero_ide, String nombres, String apellidos) {
+    public Artista(int id_serial, String tipo_ide, String numero_ide, String nombres, String apellidos) {
         this.id_serial = id_serial;
         this.tipo_ide = tipo_ide;
         this.numero_ide = numero_ide;
@@ -28,9 +25,12 @@ public class Artista {
         this.apellidos = apellidos;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-
-
+    public int getId_serial() {
+        return id_serial;
+    }
 
     public void setId_serial(int id_serial) {
         this.id_serial = id_serial;
@@ -67,11 +67,4 @@ public class Artista {
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
-
-    @Override
-    public String toString() {
-        return "Autordb [id_serial=" + id_serial + ", tipo_ide=" + tipo_ide + ", numero_ide=" + numero_ide
-                + ", nombres=" + nombres + ", apellidos=" + apellidos + "]";
-    }
-
 }
