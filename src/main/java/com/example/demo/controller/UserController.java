@@ -1,9 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Museo;
 import com.example.demo.model.Obra;
+import com.example.demo.service.MuseoService;
 import com.example.demo.service.ObraService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +19,11 @@ import java.util.NoSuchElementException;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
-   // UserService userService;
-    //ObraService artistaService;
-    ObraService obraService;
-    @GetMapping("")
-   public List<Obra> list() {return obraService.listAllObra();}
 
-  // public List<Obra> list() {return obraService.listAllObra();}
+    ObraService obraService;
+    MuseoService museoService;
+    @GetMapping("")
+    public List<Obra> list() {return obraService.listAllObra();}
 
     @GetMapping("{id}")
 
@@ -41,19 +40,18 @@ public class UserController {
         }
     }
 
+    @GetMapping("/museos/{ciudad}")
+    public ResponseEntity<Museo> get(@PathVariable String ciudad) {
+        try {
+            Museo museo = museoService.getMuseo(Integer.valueOf(ciudad));
+            if (museo.getCiudad().equals(ciudad) && museo.getNombre().startsWith("L")) {
+                return new ResponseEntity<Museo>(museo, HttpStatus.OK);
 
-    @GetMapping("{buscar}")
+            }
 
-    public List<Categorias> buscar(String descripcion) {
-
-        String sql = "SELECT e FROM Entidad e INNER JOIN e.EntidadRelacionada er WHERE er.id = :id";
-        Query query = getEntityManager().createQuery(sql);
-        query.setParameter("id", 1);
-        Entidad entidad = query.getSingleResult();
-
-
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Museo>(HttpStatus.NOT_FOUND);
+        }
+        return null;
     }
-
-
-
 }
